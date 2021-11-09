@@ -1,0 +1,80 @@
+flag= 1
+counterX=0
+counter0=0
+while(flag):
+    el = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    import random
+
+    while(1):
+        print('Выберите режим игры\nДля игры с компьютером введите " 1 "\nДля игры вдвоем введите " 2 " ')
+        player = input()
+        if player =='1' or player=='2':
+            break
+        else:
+            print("Ошибка!!!")
+    f = 1
+    while (f):
+
+        for i in range(0, 7, 3):
+            if i == 0:
+                print('  -------------')
+            print(' ', el[i], el[i + 1], el[i + 2], ' ', sep=' | ', end='\n  -------------\n')
+
+# -------------------------------------------------------                                  || ход игрока X
+        print('Ход Х \nВыберете клетку:')
+        while (1):
+            n = int(input())
+            if (el[n-1] != 'x') and (el[n-1] != 'o') :
+                el[n - 1] = 'x'
+                break
+            else:
+                print('Данная клетка заната!!!\nВыберете другую:')
+
+
+        if (el[0] == el[1] == el[2] == 'x') or (el[3] == el[4] == el[5] == 'x') or (el[6] == el[7] == el[8] == 'x') or (el[0] == el[4] == el[8] == 'x') or (el[2] == el[4] == el[6] == 'x') or (el[0] == el[3] == el[6] == 'x') or (el[1] == el[4] == el[7] == 'x') or (el[2] == el[5] == el[8] == 'x'):
+            winner = 'X победили'
+            counterX+=1
+            break
+        elif not ('1' in el) and not ('2' in el) and not ('3' in el) and not ('4' in el) and not ('5' in el) and not ('6' in el) and not ('7' in el) and not ('8' in el) and not ('9' in el):
+            winner = 'Ничья'
+            break
+        for i in range(0, 7, 3):
+            if i == 0:
+                print('  -------------')
+            print(' ', el[i], el[i + 1], el[i + 2], ' ', sep=' | ', end='\n  -------------\n')
+        # -------------------------------------------------------
+        if player=='2':
+            print('Ход O \nВыберете клетку:')               #ход игрока O
+            while (1):
+                n = int(input())
+                if (el[n - 1] != 'x') and (el[n - 1] != 'o'):
+                    el[n - 1] = 'o'
+                    break
+                else:
+                    print('Данная клетка заната!!!\nВыберете другую:')
+        else:                                # Ход компьютера
+            while (1):
+                n = random.randint(0, 8)
+                if (el[n] != 'x') and (el[n] != 'o'):
+                    el[n] = 'o'
+                    break
+            print('Ход O \nВыбрана клетка:', n+1)
+
+        if (el[0] == el[1] == el[2] == 'o') or (el[3] == el[4] == el[5] == 'o') or (el[6] == el[7] == el[8] == 'o') or (el[0] == el[4] == el[8] == 'o') or (el[2] == el[4] == el[6] == 'o') or ( el[0] == el[3] == el[6] == 'o') or (el[1] == el[4] == el[7] == 'o') or (el[2] == el[5] == el[8] == 'o'):
+            winner = 'o победили'
+            counter0+=1
+            break
+        elif not ('1' in el) and not ('2' in el) and not ('3' in el) and not ('4' in el) and not ('5' in el) and not ('6' in el) and not ('7' in el) and not ('8' in el) and not ('9' in el):
+            winner = 'Ничья'
+            break
+# -------------------------------------------------------
+
+    print(winner,"\nСчет\nX :",counterX,"\nO :",counter0)
+    for i in range(0, 7, 3):
+        if i == 0:
+            print('  -------------')
+        print(' ', el[i], el[i + 1], el[i + 2], ' ', sep=' | ', end='\n  -------------\n')
+    print('Для выхода введите "выход"\nДля новой игры нажмите enter')
+    sw=input()
+    if sw=='exit'or sw=='Exit' or sw=='выход'or sw=='Ввход' or sw=='ds[jl'or sw=='Ds[jl':
+        flag=0
